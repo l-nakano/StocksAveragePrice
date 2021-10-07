@@ -6,7 +6,7 @@ struct StocksAveragePriceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AddNovaNotaView(notasViewModel: notasViewModel)
+            NotasNegociacaoView(notasViewModel: notasViewModel)
         }
     }
 }
