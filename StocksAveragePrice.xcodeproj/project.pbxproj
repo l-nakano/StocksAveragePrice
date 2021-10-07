@@ -13,7 +13,9 @@
 		49F73DD9270E11DA00223046 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F73DD8270E11DA00223046 /* Preview Assets.xcassets */; };
 		49F73DE2270E33E500223046 /* NotaNegociacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DE1270E33E500223046 /* NotaNegociacao.swift */; };
 		49F73DEB270E5A7700223046 /* NotasListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DEA270E5A7700223046 /* NotasListViewModel.swift */; };
-		49F73DED270E5F6C00223046 /* NotaSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DEC270E5F6C00223046 /* NotaSample.swift */; };
+		49F73DED270E5F6C00223046 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DEC270E5F6C00223046 /* Sample.swift */; };
+		49F73DF1270E667500223046 /* Acao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DF0270E667500223046 /* Acao.swift */; };
+		49F73DF3270E68AA00223046 /* HistoricoOperacoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +26,9 @@
 		49F73DD8270E11DA00223046 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49F73DE1270E33E500223046 /* NotaNegociacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotaNegociacao.swift; sourceTree = "<group>"; };
 		49F73DEA270E5A7700223046 /* NotasListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotasListViewModel.swift; sourceTree = "<group>"; };
-		49F73DEC270E5F6C00223046 /* NotaSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotaSample.swift; sourceTree = "<group>"; };
+		49F73DEC270E5F6C00223046 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
+		49F73DF0270E667500223046 /* Acao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acao.swift; sourceTree = "<group>"; };
+		49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricoOperacoes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +90,10 @@
 		49F73DE0270E339600223046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				49F73DEC270E5F6C00223046 /* Sample.swift */,
 				49F73DE1270E33E500223046 /* NotaNegociacao.swift */,
-				49F73DEC270E5F6C00223046 /* NotaSample.swift */,
+				49F73DF0270E667500223046 /* Acao.swift */,
+				49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -178,10 +184,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F73DF3270E68AA00223046 /* HistoricoOperacoes.swift in Sources */,
 				49F73DD4270E11D800223046 /* AddNovaNotaView.swift in Sources */,
+				49F73DF1270E667500223046 /* Acao.swift in Sources */,
 				49F73DD2270E11D800223046 /* StocksAveragePriceApp.swift in Sources */,
 				49F73DEB270E5A7700223046 /* NotasListViewModel.swift in Sources */,
-				49F73DED270E5F6C00223046 /* NotaSample.swift in Sources */,
+				49F73DED270E5F6C00223046 /* Sample.swift in Sources */,
 				49F73DE2270E33E500223046 /* NotaNegociacao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

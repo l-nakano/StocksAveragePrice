@@ -20,4 +20,10 @@ struct NotaNegociacao: Identifiable {
     var impostos: Double
     var IRRF: Double
     var outros: Double
+    
+    // MARK: - Ações Contidas na Nota de Negociação
+    var listaAcoes: [Acao]
+    
+    // MARK: - Outras Informações
+    var dataOperacao: Date
 }
