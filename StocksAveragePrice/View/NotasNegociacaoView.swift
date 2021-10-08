@@ -7,16 +7,26 @@ struct NotasNegociacaoView: View {
     @FetchRequest(fetchRequest: NotaNegociacao.fetch(), animation: .default)
     private var notasNegociacao: FetchedResults<NotaNegociacao>
     
+    @State private var novaNotaAberta = false
+    
+    @ObservedObject var notaViewModel: NotaViewModel
+    
+    func teste(_ nota: NotaNegociacao) -> some View {
+        notaViewModel.editarNota(nota)
+        return AdicionarEditarNota(notaViewModel: notaViewModel)
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
                 List {
                     ForEach(notasNegociacao) { nota in
-                        NavigationLink(
-                            destination: Text("Destination"),
-                            label: {
-                                Text("\(nota.dataFormatada())")
-                            })
+                        NavigationLink {
+                            AdicionarEditarNota(notaViewModel: notaViewModel)
+                                .onAppear(perform: { notaViewModel.editarNota(nota) })
+                        } label: {
+                            Text("\(nota.dataFormatada())")
+                        }
                     }
                     .onDelete { indexSet in
                         deletarNota(index: indexSet)
@@ -25,7 +35,7 @@ struct NotasNegociacaoView: View {
                 .navigationBarTitle(Text("Notas de Negociação"), displayMode: .inline)
                 .toolbar {
                     Button(action: {
-                        addItem()
+                        novaNotaAberta.toggle()
                     }, label: {
                         Image(systemName: "plus")
                     })
@@ -35,6 +45,9 @@ struct NotasNegociacaoView: View {
                         .foregroundColor(.gray)
                 }
             }
+        }.sheet(isPresented: $novaNotaAberta) {
+            AdicionarEditarNota(notaViewModel: notaViewModel)
+                .onAppear(perform: { notaViewModel.novaNota() })
         }
     }
     
@@ -56,7 +69,7 @@ struct NotasNegociacaoView: View {
 
 struct NotasNegociacao_Previews: PreviewProvider {
     static var previews: some View {
-        NotasNegociacaoView()
+        NotasNegociacaoView(notaViewModel: NotaViewModel())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

@@ -41,15 +41,24 @@ extension Acao {
         }
     }
     
-    static func sample(context: NSManagedObjectContext) -> Acao {
-        return Acao(empresa: "Itaú Unibanco",
-                    logo: UIImage(systemName: "photo")?.pngData(),
-                    ticker: "ITUB3",
-                    precoMedio: 22.54,
-                    quantidade: 100,
-                    saldoAtual: 2254.0,
-                    ultimaCotacao: 22.54,
-                    retornoPM: 0.0,
-                    context: context)
+    static func sample(context: NSManagedObjectContext) -> [Acao] {
+        return [Acao(empresa: "Itaú Unibanco",
+                     logo: UIImage(systemName: "photo")?.pngData(),
+                     ticker: "ITUB3",
+                     precoMedio: 22.54,
+                     quantidade: 100,
+                     saldoAtual: 2254.0,
+                     ultimaCotacao: 22.54,
+                     retornoPM: 0.0,
+                     context: context),
+                Acao(empresa: "Vale",
+                     logo: UIImage(systemName: "photo")?.pngData(),
+                     ticker: "VALE3",
+                     precoMedio: 75.05,
+                     quantidade: 25,
+                     saldoAtual: 1876.25,
+                     ultimaCotacao: 75.05,
+                     retornoPM: 0.0,
+                     context: context)]
     }
 }

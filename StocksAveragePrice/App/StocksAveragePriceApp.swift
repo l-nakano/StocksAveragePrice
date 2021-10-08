@@ -8,7 +8,7 @@ struct StocksAveragePriceApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NotasNegociacaoView()
+            NotasNegociacaoView(notaViewModel: NotaViewModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

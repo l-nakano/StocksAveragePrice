@@ -37,9 +37,9 @@
         <relationship name="listaAcoes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Acao" inverseName="notaNegociacao" inverseEntity="Acao"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-156.98583984375" positionY="35.16476440429688" width="128" height="44"/>
-        <element name="NotaNegociacao" positionX="-379.397705078125" positionY="400.2754821777344" width="128" height="253"/>
         <element name="Acao" positionX="-154.914794921875" positionY="196.29296875" width="128" height="193"/>
         <element name="HistoricoOperacoes" positionX="-383.92041015625" positionY="285.890380859375" width="128" height="88"/>
+        <element name="Item" positionX="-156.98583984375" positionY="35.16476440429688" width="128" height="44"/>
+        <element name="NotaNegociacao" positionX="-379.397705078125" positionY="400.2754821777344" width="128" height="253"/>
     </elements>
 </model>
