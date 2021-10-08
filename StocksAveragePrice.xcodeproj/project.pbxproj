@@ -7,28 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		495F3127270F2F5D00EC8628 /* NotaNegociacaoExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F3126270F2F5D00EC8628 /* NotaNegociacaoExtension.swift */; };
+		495F312C270F7A6D00EC8628 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 495F312A270F7A6D00EC8628 /* Model.xcdatamodeld */; };
+		495F316E270F809700EC8628 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F316D270F809700EC8628 /* PersistenceController.swift */; };
 		49F73DD2270E11D800223046 /* StocksAveragePriceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DD1270E11D800223046 /* StocksAveragePriceApp.swift */; };
 		49F73DD4270E11D800223046 /* NotasNegociacaoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DD3270E11D800223046 /* NotasNegociacaoView.swift */; };
 		49F73DD6270E11DA00223046 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F73DD5270E11DA00223046 /* Assets.xcassets */; };
 		49F73DD9270E11DA00223046 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49F73DD8270E11DA00223046 /* Preview Assets.xcassets */; };
 		49F73DE2270E33E500223046 /* NotaNegociacao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DE1270E33E500223046 /* NotaNegociacao.swift */; };
-		49F73DEB270E5A7700223046 /* NotasListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DEA270E5A7700223046 /* NotasListViewModel.swift */; };
-		49F73DED270E5F6C00223046 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DEC270E5F6C00223046 /* Sample.swift */; };
 		49F73DF1270E667500223046 /* Acao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DF0270E667500223046 /* Acao.swift */; };
 		49F73DF3270E68AA00223046 /* HistoricoOperacoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		495F3126270F2F5D00EC8628 /* NotaNegociacaoExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotaNegociacaoExtension.swift; sourceTree = "<group>"; };
+		495F312B270F7A6D00EC8628 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		495F316D270F809700EC8628 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		49F73DCE270E11D800223046 /* StocksAveragePrice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StocksAveragePrice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F73DD1270E11D800223046 /* StocksAveragePriceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksAveragePriceApp.swift; sourceTree = "<group>"; };
 		49F73DD3270E11D800223046 /* NotasNegociacaoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotasNegociacaoView.swift; sourceTree = "<group>"; };
 		49F73DD5270E11DA00223046 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49F73DD8270E11DA00223046 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		49F73DE1270E33E500223046 /* NotaNegociacao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotaNegociacao.swift; sourceTree = "<group>"; };
-		49F73DEA270E5A7700223046 /* NotasListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotasListViewModel.swift; sourceTree = "<group>"; };
-		49F73DEC270E5F6C00223046 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		49F73DF0270E667500223046 /* Acao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Acao.swift; sourceTree = "<group>"; };
 		49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricoOperacoes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,11 +90,8 @@
 		49F73DE0270E339600223046 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				49F73DEC270E5F6C00223046 /* Sample.swift */,
-				49F73DE1270E33E500223046 /* NotaNegociacao.swift */,
-				49F73DF0270E667500223046 /* Acao.swift */,
-				49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */,
-				495F3126270F2F5D00EC8628 /* NotaNegociacaoExtension.swift */,
+				495F312A270F7A6D00EC8628 /* Model.xcdatamodeld */,
+				495F316D270F809700EC8628 /* PersistenceController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -104,7 +99,9 @@
 		49F73DE9270E5A4D00223046 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				49F73DEA270E5A7700223046 /* NotasListViewModel.swift */,
+				49F73DE1270E33E500223046 /* NotaNegociacao.swift */,
+				49F73DF0270E667500223046 /* Acao.swift */,
+				49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -187,13 +184,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				495F3127270F2F5D00EC8628 /* NotaNegociacaoExtension.swift in Sources */,
+				495F316E270F809700EC8628 /* PersistenceController.swift in Sources */,
 				49F73DF3270E68AA00223046 /* HistoricoOperacoes.swift in Sources */,
 				49F73DD4270E11D800223046 /* NotasNegociacaoView.swift in Sources */,
 				49F73DF1270E667500223046 /* Acao.swift in Sources */,
+				495F312C270F7A6D00EC8628 /* Model.xcdatamodeld in Sources */,
 				49F73DD2270E11D800223046 /* StocksAveragePriceApp.swift in Sources */,
-				49F73DEB270E5A7700223046 /* NotasListViewModel.swift in Sources */,
-				49F73DED270E5F6C00223046 /* Sample.swift in Sources */,
 				49F73DE2270E33E500223046 /* NotaNegociacao.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,6 +393,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		495F312A270F7A6D00EC8628 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				495F312B270F7A6D00EC8628 /* Model.xcdatamodel */,
+			);
+			currentVersion = 495F312B270F7A6D00EC8628 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 49F73DC6270E11D800223046 /* Project object */;
 }
