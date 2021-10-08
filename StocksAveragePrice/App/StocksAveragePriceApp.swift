@@ -1,12 +1,15 @@
 import SwiftUI
+import CoreData
 
 @main
 struct StocksAveragePriceApp: App {
-    @StateObject var notasViewModel = NotasListViewModel()
+    let persistenceController = PersistenceController.preview
+//    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
-            NotasNegociacaoView(notasViewModel: notasViewModel)
+            NotasNegociacaoView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
