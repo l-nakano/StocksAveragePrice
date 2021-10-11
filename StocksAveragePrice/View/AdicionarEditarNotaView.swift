@@ -81,7 +81,16 @@ struct AdicionarEditarNotaView: View {
     var acao: some View {
         Section(header: Text("PAPÉIS")) {
             ForEach(notaViewModel.acoes) { acao in
-                Text(acao.ticker)
+                HStack {
+                    Text(acao.ticker)
+                    if acao.operacao == 0 {
+                        Text("V")
+                    } else {
+                        Text("C")
+                    }
+                    Text(String(acao.quantidade))
+                    Text(String(acao.preco))
+                }
             }
         }
     }

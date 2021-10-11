@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49336FC42714E75600FCBB8B /* AcaoNegociada.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49336FC32714E75500FCBB8B /* AcaoNegociada.swift */; };
 		495F312C270F7A6D00EC8628 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 495F312A270F7A6D00EC8628 /* Model.xcdatamodeld */; };
 		495F316E270F809700EC8628 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495F316D270F809700EC8628 /* PersistenceController.swift */; };
 		49F6CC1F2710B80200F737B5 /* AdicionarEditarNotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F6CC1E2710B80200F737B5 /* AdicionarEditarNotaView.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		49336FC32714E75500FCBB8B /* AcaoNegociada.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcaoNegociada.swift; sourceTree = "<group>"; };
 		495F312B270F7A6D00EC8628 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		495F316D270F809700EC8628 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		49F6CC1E2710B80200F737B5 /* AdicionarEditarNotaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdicionarEditarNotaView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				49F73DF0270E667500223046 /* Acao.swift */,
 				49F73DF2270E68AA00223046 /* HistoricoOperacoes.swift */,
 				49F6CC202710CBF200F737B5 /* NotaViewModel.swift */,
+				49336FC32714E75500FCBB8B /* AcaoNegociada.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				49F73DD4270E11D800223046 /* NotasNegociacaoView.swift in Sources */,
 				49F73DF1270E667500223046 /* Acao.swift in Sources */,
 				495F312C270F7A6D00EC8628 /* Model.xcdatamodeld in Sources */,
+				49336FC42714E75600FCBB8B /* AcaoNegociada.swift in Sources */,
 				49F73DD2270E11D800223046 /* StocksAveragePriceApp.swift in Sources */,
 				49F73DE2270E33E500223046 /* NotaNegociacao.swift in Sources */,
 			);

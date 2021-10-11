@@ -15,7 +15,7 @@ class NotaViewModel: ObservableObject {
     @Published var impostos = 0.0
     @Published var irrf = 0.0
     @Published var outros = 0.0
-    @Published var acoes = [Acao]()
+    @Published var acoes = [AcaoNegociada]()
     
     @Published var notaNegociacao: NotaNegociacao!
     
@@ -37,7 +37,7 @@ class NotaViewModel: ObservableObject {
             self.impostos = nota?.impostos ?? 0.0
             self.irrf = nota?.irrf ?? 0.0
             self.outros = nota?.outros ?? 0.0
-            self.acoes = Array(nota?.listaAcoes as? Set<Acao> ?? [])
+            self.acoes = Array(nota?.listaAcoes as? Set<AcaoNegociada> ?? [])
         }.store(in: &subscriptions)
     }
     

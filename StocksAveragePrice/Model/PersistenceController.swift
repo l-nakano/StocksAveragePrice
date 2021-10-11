@@ -7,13 +7,14 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        let historico = HistoricoOperacoes.sample(context: viewContext)
-        let acoes = Acao.sample(context: viewContext)
-        for acao in acoes {
-            acao.addToHistorico(historico)
-        }
+//        let historico = HistoricoOperacoes.sample(context: viewContext)
+//        let acoes = Acao.sample(context: viewContext)
+//        for acao in acoes {
+//            acao.addToHistorico(historico)
+//        }
+        let acoesNegociadas = AcaoNegociada.sample(context: viewContext)
         let nota = NotaNegociacao.sample(context: viewContext)
-        nota.addToListaAcoes(NSSet(array: acoes))
+        nota.addToListaAcoes(NSSet(array: acoesNegociadas))
         do {
             try viewContext.save()
         } catch {
@@ -38,7 +39,6 @@ struct PersistenceController {
     }
     
     func save() {
-        print("Salvando")
         let viewContext = container.viewContext
         do {
             try viewContext.save()
