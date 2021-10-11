@@ -19,6 +19,8 @@ class NotaViewModel: ObservableObject {
     
     @Published var notaNegociacao: NotaNegociacao!
     
+    @Published var novaNotaAberta = false
+    
     var subscriptions = Set<AnyCancellable>()
     
     init() {

@@ -7,13 +7,11 @@ struct NotasNegociacaoView: View {
     @FetchRequest(fetchRequest: NotaNegociacao.fetch(), animation: .default)
     private var notasNegociacao: FetchedResults<NotaNegociacao>
     
-    @State private var novaNotaAberta = false
-    
     @ObservedObject var notaViewModel: NotaViewModel
     
     func teste(_ nota: NotaNegociacao) -> some View {
         notaViewModel.editarNota(nota)
-        return AdicionarEditarNota(notaViewModel: notaViewModel)
+        return AdicionarEditarNotaView(notaViewModel: notaViewModel)
     }
     
     var body: some View {
@@ -22,7 +20,7 @@ struct NotasNegociacaoView: View {
                 List {
                     ForEach(notasNegociacao) { nota in
                         NavigationLink {
-                            AdicionarEditarNota(notaViewModel: notaViewModel)
+                            AdicionarEditarNotaView(notaViewModel: notaViewModel)
                                 .onAppear(perform: { notaViewModel.editarNota(nota) })
                         } label: {
                             Text("\(nota.dataFormatada())")
@@ -35,7 +33,7 @@ struct NotasNegociacaoView: View {
                 .navigationBarTitle(Text("Notas de Negociação"), displayMode: .inline)
                 .toolbar {
                     Button(action: {
-                        novaNotaAberta.toggle()
+                        notaViewModel.novaNotaAberta.toggle()
                     }, label: {
                         Image(systemName: "plus")
                     })
@@ -45,8 +43,8 @@ struct NotasNegociacaoView: View {
                         .foregroundColor(.gray)
                 }
             }
-        }.sheet(isPresented: $novaNotaAberta) {
-            AdicionarEditarNota(notaViewModel: notaViewModel)
+        }.sheet(isPresented: $notaViewModel.novaNotaAberta) {
+            AdicionarEditarNotaView(notaViewModel: notaViewModel)
                 .onAppear(perform: { notaViewModel.novaNota() })
         }
     }
@@ -57,17 +55,9 @@ struct NotasNegociacaoView: View {
             PersistenceController.shared.save()
         }
     }
-    
-    private func addItem() {
-        withAnimation {
-            _ = NotaNegociacao(valorLiquidoOperacoes: 0.0, taxaLiquidacao: 0.0, taxaRegistro: 0.0, taxaTermoOpcoes: 0.0, taxaANA: 0.0, emolumentos: 0.0, taxaOperacional: 0.0, execucao: 0.0, taxaCustodia: 0.0, impostos: 0.0, IRRF: 0.0, outros: 0.0, dataOperacao: Date(), context: viewContext)
-
-            PersistenceController.shared.save()
-        }
-    }
 }
 
-struct NotasNegociacao_Previews: PreviewProvider {
+struct NotasNegociacaoView_Previews: PreviewProvider {
     static var previews: some View {
         NotasNegociacaoView(notaViewModel: NotaViewModel())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

@@ -1,8 +1,8 @@
 import SwiftUI
 
-struct AdicionarEditarNota: View {
+struct AdicionarEditarNotaView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(fetchRequest: NotaNegociacao.fetch(), animation: .default)
     private var notasNegociacao: FetchedResults<NotaNegociacao>
     
@@ -17,16 +17,34 @@ struct AdicionarEditarNota: View {
     }()
     
     var body: some View {
-        List {
-            clearing
-            bolsa
-            custoOperacional
-            acao
+        VStack(spacing: 0) {
+            if notaViewModel.notaNegociacao == nil {
+                HStack {
+                    Button(action: {
+                        notaViewModel.novaNotaAberta.toggle()
+                    }, label: {
+                        Text("Cancelar")
+                    })
+                    Spacer()
+                    Button(action: {
+                        salvarNotaNegociacao()
+                        notaViewModel.novaNotaAberta.toggle()
+                    }, label: {
+                        Text("Salvar")
+                    })
+                }.padding(20)
+            }
+            List {
+                clearing
+                bolsa
+                custoOperacional
+                acao
+            }
+            .listStyle(.insetGrouped)
         }
-        .listStyle(.insetGrouped)
         .toolbar {
             Button(action: {
-                print("Alo")
+                salvarNotaNegociacao()
             }, label: {
                 Text("Salvar")
             })
@@ -65,13 +83,34 @@ struct AdicionarEditarNota: View {
             ForEach(notaViewModel.acoes) { acao in
                 Text(acao.ticker)
             }
-            Text("Teste")
+        }
+    }
+    
+    private func salvarNotaNegociacao() {
+        withAnimation {
+            _ = NotaNegociacao(
+                valorLiquidoOperacoes: notaViewModel.valorLiquidoOperacoes,
+                taxaLiquidacao: notaViewModel.taxaLiquidacao,
+                taxaRegistro: notaViewModel.taxaRegistro,
+                taxaTermoOpcoes: notaViewModel.taxaTermoOpcoes,
+                taxaANA: notaViewModel.taxaANA,
+                emolumentos: notaViewModel.emolumentos,
+                taxaOperacional: notaViewModel.taxaOperacional,
+                execucao: notaViewModel.execucao,
+                taxaCustodia: notaViewModel.taxaCustodia,
+                impostos: notaViewModel.impostos,
+                IRRF: notaViewModel.irrf,
+                outros: notaViewModel.outros,
+                dataOperacao: Date(),
+                context: viewContext)
+            
+            PersistenceController.shared.save()
         }
     }
 }
 
-struct AdicionarEditarNota_Previews: PreviewProvider {
+struct AdicionarEditarNotaView_Previews: PreviewProvider {
     static var previews: some View {
-        AdicionarEditarNota(notaViewModel: NotaViewModel())
+        AdicionarEditarNotaView(notaViewModel: NotaViewModel())
     }
 }

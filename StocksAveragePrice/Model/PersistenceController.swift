@@ -38,6 +38,7 @@ struct PersistenceController {
     }
     
     func save() {
+        print("Salvando")
         let viewContext = container.viewContext
         do {
             try viewContext.save()
