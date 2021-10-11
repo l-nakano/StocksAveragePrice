@@ -80,15 +80,32 @@ struct AdicionarEditarNotaView: View {
     
     var acao: some View {
         Section(header: Text("PAPÉIS")) {
+            HStack {
+                Text("Ação")
+                    .font(.callout)
+                Spacer()
+                Spacer()
+                Text("Operação")
+                    .font(.callout)
+                Spacer()
+                Text("Quantidade")
+                    .font(.callout)
+                Spacer()
+                Text("Preço")
+                    .font(.callout)
+            }
             ForEach(notaViewModel.acoes) { acao in
                 HStack {
                     Text(acao.ticker)
+                    Spacer()
                     if acao.operacao == 0 {
                         Text("V")
                     } else {
                         Text("C")
                     }
+                    Spacer()
                     Text(String(acao.quantidade))
+                    Spacer()
                     Text(String(acao.preco))
                 }
             }
