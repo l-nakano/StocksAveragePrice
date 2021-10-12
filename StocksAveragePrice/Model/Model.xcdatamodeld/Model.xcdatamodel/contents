@@ -14,7 +14,7 @@
     <entity name="AcaoNegociada" representedClassName="AcaoNegociada" syncable="YES" codeGenerationType="class">
         <attribute name="operacao" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="preco" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="quantidade" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="quantidade" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="ticker_" optional="YES" attributeType="String"/>
         <relationship name="notaNegociacao" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NotaNegociacao" inverseName="listaAcoes" inverseEntity="NotaNegociacao"/>
     </entity>
@@ -41,8 +41,8 @@
     </entity>
     <elements>
         <element name="Acao" positionX="-154.914794921875" positionY="196.29296875" width="128" height="178"/>
+        <element name="AcaoNegociada" positionX="-156.350830078125" positionY="550.1760864257812" width="128" height="104"/>
         <element name="HistoricoOperacoes" positionX="-378.70263671875" positionY="286.416259765625" width="128" height="88"/>
         <element name="NotaNegociacao" positionX="-379.397705078125" positionY="400.2754821777344" width="128" height="253"/>
-        <element name="AcaoNegociada" positionX="-156.350830078125" positionY="550.1760864257812" width="128" height="118"/>
     </elements>
 </model>

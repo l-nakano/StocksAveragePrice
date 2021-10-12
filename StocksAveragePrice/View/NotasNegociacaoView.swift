@@ -34,6 +34,7 @@ struct NotasNegociacaoView: View {
                 .toolbar {
                     Button(action: {
                         notaViewModel.novaNotaAberta.toggle()
+                        notaViewModel.novaNota()
                     }, label: {
                         Image(systemName: "plus")
                     })
@@ -45,7 +46,6 @@ struct NotasNegociacaoView: View {
             }
         }.sheet(isPresented: $notaViewModel.novaNotaAberta) {
             AdicionarEditarNotaView(notaViewModel: notaViewModel)
-                .onAppear(perform: { notaViewModel.novaNota() })
         }
     }
     

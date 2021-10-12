@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import CoreData
 
 class NotaViewModel: ObservableObject {
 
@@ -47,6 +48,47 @@ class NotaViewModel: ObservableObject {
     
     func editarNota(_ nota: NotaNegociacao) {
         notaNegociacao = nota
+    }
+    
+    func adicionarNovaAcao(_ acao: AcaoNegociada) {
+        acoes.append(acao)
+    }
+    
+    func salvarNotaNegociacao(viewContext: NSManagedObjectContext) {
+        if notaNegociacao == nil {
+            let novaNota = NotaNegociacao(valorLiquidoOperacoes: valorLiquidoOperacoes,
+                               taxaLiquidacao: taxaLiquidacao,
+                               taxaRegistro: taxaRegistro,
+                               taxaTermoOpcoes: taxaTermoOpcoes,
+                               taxaANA: taxaANA,
+                               emolumentos: emolumentos,
+                               taxaOperacional: taxaOperacional,
+                               execucao: execucao,
+                               taxaCustodia: taxaCustodia,
+                               impostos: impostos,
+                               IRRF: irrf,
+                               outros: outros,
+                               dataOperacao: Date(),
+                               context: viewContext)
+            novaNota.addToListaAcoes(NSSet(array: acoes))
+        } else {
+            notaNegociacao.valorLiquidoOperacoes = valorLiquidoOperacoes
+            notaNegociacao.taxaLiquidacao = taxaLiquidacao
+            notaNegociacao.taxaRegistro = taxaRegistro
+            notaNegociacao.taxaTermoOpcoes = taxaTermoOpcoes
+            notaNegociacao.taxaANA = taxaANA
+            notaNegociacao.emolumentos = emolumentos
+            notaNegociacao.taxaOperacional = taxaOperacional
+            notaNegociacao.execucao = execucao
+            notaNegociacao.taxaCustodia = taxaCustodia
+            notaNegociacao.impostos = impostos
+            notaNegociacao.irrf = irrf
+            notaNegociacao.outros = outros
+            notaNegociacao.dataOperacao = Date()
+            notaNegociacao.addToListaAcoes(NSSet(array: acoes))
+        }
+        
+        PersistenceController.shared.save()
     }
 }
 

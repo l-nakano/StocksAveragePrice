@@ -1,7 +1,7 @@
 import CoreData
 
 extension AcaoNegociada {
-    convenience init(ticker: String, operacao: TipoOperacao, preco: Double, quantidade: Int32, context: NSManagedObjectContext) {
+    convenience init(ticker: String, operacao: TipoOperacao, preco: Double, quantidade: Double, context: NSManagedObjectContext) {
         self.init(context: context)
         self.ticker_ = ticker
         self.operacao = operacao.rawValue

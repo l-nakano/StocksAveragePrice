@@ -2,17 +2,24 @@ import SwiftUI
 
 struct AdicionarEditarNotaView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) private var presentationMode
     
     @FetchRequest(fetchRequest: NotaNegociacao.fetch(), animation: .default)
     private var notasNegociacao: FetchedResults<NotaNegociacao>
     
     @ObservedObject var notaViewModel: NotaViewModel
     
-    private let formatoNumero: NumberFormatter = {
+    private let formatoMoeda: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.currencyDecimalSeparator = ","
         formatter.currencySymbol = "R$ "
         formatter.numberStyle = .currency
+        return formatter
+    }()
+    
+    private let formatoInteiro: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         return formatter
     }()
     
@@ -45,6 +52,7 @@ struct AdicionarEditarNotaView: View {
         .toolbar {
             Button(action: {
                 salvarNotaNegociacao()
+                self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Salvar")
             })
@@ -53,28 +61,28 @@ struct AdicionarEditarNotaView: View {
     
     var custoOperacional: some View {
         Section(header: Text("CUSTO OPERACIONAL")) {
-            TextField("Taxa operacional", value: $notaViewModel.taxaOperacional, formatter: formatoNumero)
-            TextField("Execução", value: $notaViewModel.execucao, formatter: formatoNumero)
-            TextField("Taxa de custódia", value: $notaViewModel.taxaCustodia, formatter: formatoNumero)
-            TextField("Impostos", value: $notaViewModel.impostos, formatter: formatoNumero)
-            TextField("I.R.R.F.", value: $notaViewModel.irrf, formatter: formatoNumero)
-            TextField("Outros", value: $notaViewModel.outros, formatter: formatoNumero)
+            TextField("Taxa operacional", value: $notaViewModel.taxaOperacional, formatter: formatoMoeda)
+            TextField("Execução", value: $notaViewModel.execucao, formatter: formatoMoeda)
+            TextField("Taxa de custódia", value: $notaViewModel.taxaCustodia, formatter: formatoMoeda)
+            TextField("Impostos", value: $notaViewModel.impostos, formatter: formatoMoeda)
+            TextField("I.R.R.F.", value: $notaViewModel.irrf, formatter: formatoMoeda)
+            TextField("Outros", value: $notaViewModel.outros, formatter: formatoMoeda)
         }
     }
     
     var bolsa: some View {
         Section(header: Text("BOLSA")) {
-            TextField("Taxa de termo/opções", value: $notaViewModel.taxaTermoOpcoes, formatter: formatoNumero)
-            TextField("Taxa A.N.A.", value: $notaViewModel.taxaANA, formatter: formatoNumero)
-            TextField("Emolumentos", value: $notaViewModel.emolumentos, formatter: formatoNumero)
+            TextField("Taxa de termo/opções", value: $notaViewModel.taxaTermoOpcoes, formatter: formatoMoeda)
+            TextField("Taxa A.N.A.", value: $notaViewModel.taxaANA, formatter: formatoMoeda)
+            TextField("Emolumentos", value: $notaViewModel.emolumentos, formatter: formatoMoeda)
         }
     }
     
     var clearing: some View {
         Section(header: Text("CLEARING")) {
-            TextField("Valor líquido das operações", value: $notaViewModel.valorLiquidoOperacoes, formatter: formatoNumero)
-            TextField("Taxa de liquidação", value: $notaViewModel.taxaLiquidacao, formatter: formatoNumero)
-            TextField("Taxa de registro", value: $notaViewModel.taxaRegistro, formatter: formatoNumero)
+            TextField("Valor líquido das operações", value: $notaViewModel.valorLiquidoOperacoes, formatter: formatoMoeda)
+            TextField("Taxa de liquidação", value: $notaViewModel.taxaLiquidacao, formatter: formatoMoeda)
+            TextField("Taxa de registro", value: $notaViewModel.taxaRegistro, formatter: formatoMoeda)
         }
     }
     
@@ -82,55 +90,64 @@ struct AdicionarEditarNotaView: View {
         Section(header: Text("PAPÉIS")) {
             HStack {
                 Text("Ação")
-                    .font(.callout)
-                Spacer()
-                Spacer()
+                    .frame(maxWidth: .infinity)
                 Text("Operação")
-                    .font(.callout)
-                Spacer()
+                    .frame(maxWidth: .infinity)
                 Text("Quantidade")
-                    .font(.callout)
-                Spacer()
+                    .frame(maxWidth: .infinity)
                 Text("Preço")
-                    .font(.callout)
+                    .frame(maxWidth: .infinity)
             }
-            ForEach(notaViewModel.acoes) { acao in
-                HStack {
-                    Text(acao.ticker)
-                    Spacer()
-                    if acao.operacao == 0 {
-                        Text("V")
-                    } else {
-                        Text("C")
+            .font(.callout)
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            if notaViewModel.acoes.count > 0 {
+                ForEach(notaViewModel.acoes.indices, id: \.self) { index in
+                    HStack {
+                        TextField("Ticker", text: $notaViewModel.acoes[index].ticker)
+                            .frame(maxWidth: .infinity)
+                        if notaViewModel.acoes[index].operacao == 0 {
+                            Text("V")
+                                .frame(maxWidth: .infinity)
+                        } else {
+                            Text("C")
+                                .frame(maxWidth: .infinity)
+                        }
+                        TextField("Quantidade", value: $notaViewModel.acoes[index].quantidade, formatter: formatoInteiro)
+                            .frame(maxWidth: .infinity)
+                        TextField("Preço", value: $notaViewModel.acoes[index].preco, formatter: formatoMoeda)
+                            .frame(maxWidth: .infinity)
                     }
-                    Spacer()
-                    Text(String(acao.quantidade))
-                    Spacer()
-                    Text(String(acao.preco))
                 }
             }
+            HStack {
+                Spacer()
+                Button(action: {
+                    adicionarNovaAcao()
+                }, label: {
+                    Image(systemName: "plus.circle.fill")
+                })
+                Spacer()
+            }
+        }
+    }
+    
+    private func adicionarNovaAcao() {
+        withAnimation {
+            let novaAcao = AcaoNegociada(ticker: "",
+                                         operacao: .compra,
+                                         preco: 0,
+                                         quantidade: 0,
+                                         context: viewContext)
+            notaViewModel.adicionarNovaAcao(novaAcao)
+            
+            PersistenceController.shared.save()
         }
     }
     
     private func salvarNotaNegociacao() {
         withAnimation {
-            _ = NotaNegociacao(
-                valorLiquidoOperacoes: notaViewModel.valorLiquidoOperacoes,
-                taxaLiquidacao: notaViewModel.taxaLiquidacao,
-                taxaRegistro: notaViewModel.taxaRegistro,
-                taxaTermoOpcoes: notaViewModel.taxaTermoOpcoes,
-                taxaANA: notaViewModel.taxaANA,
-                emolumentos: notaViewModel.emolumentos,
-                taxaOperacional: notaViewModel.taxaOperacional,
-                execucao: notaViewModel.execucao,
-                taxaCustodia: notaViewModel.taxaCustodia,
-                impostos: notaViewModel.impostos,
-                IRRF: notaViewModel.irrf,
-                outros: notaViewModel.outros,
-                dataOperacao: Date(),
-                context: viewContext)
-            
-            PersistenceController.shared.save()
+            notaViewModel.salvarNotaNegociacao(viewContext: viewContext)
         }
     }
 }
