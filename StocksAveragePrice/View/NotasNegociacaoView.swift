@@ -9,11 +9,6 @@ struct NotasNegociacaoView: View {
     
     @ObservedObject var notaViewModel: NotaViewModel
     
-    func teste(_ nota: NotaNegociacao) -> some View {
-        notaViewModel.editarNota(nota)
-        return AdicionarEditarNotaView(notaViewModel: notaViewModel)
-    }
-    
     var body: some View {
         NavigationView {
             ZStack {
