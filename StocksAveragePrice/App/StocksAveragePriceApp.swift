@@ -3,12 +3,11 @@ import CoreData
 
 @main
 struct StocksAveragePriceApp: App {
-    let persistenceController = PersistenceController.preview
-//    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
-            NotasNegociacaoView()
+            NotasNegociacaoView(notaViewModel: NotaViewModel())
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
