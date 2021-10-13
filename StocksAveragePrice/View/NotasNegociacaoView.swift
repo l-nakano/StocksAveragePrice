@@ -13,17 +13,7 @@ struct NotasNegociacaoView: View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(notasNegociacao) { nota in
-                        NavigationLink {
-                            AdicionarEditarNotaView(notaViewModel: notaViewModel)
-                                .onAppear(perform: { notaViewModel.editarNota(nota) })
-                        } label: {
-                            Text("\(nota.dataFormatada())")
-                        }
-                    }
-                    .onDelete { indexSet in
-                        deletarNota(index: indexSet)
-                    }
+                    notasRegistradas
                 }
                 .navigationBarTitle(Text("Notas de Negociação"), displayMode: .inline)
                 .toolbar {
@@ -41,6 +31,20 @@ struct NotasNegociacaoView: View {
             }
         }.sheet(isPresented: $notaViewModel.novaNotaAberta) {
             AdicionarEditarNotaView(notaViewModel: notaViewModel)
+        }
+    }
+    
+    var notasRegistradas: some View {
+        ForEach(notasNegociacao) { nota in
+            NavigationLink {
+                AdicionarEditarNotaView(notaViewModel: notaViewModel)
+                    .onAppear(perform: { notaViewModel.editarNota(nota) })
+            } label: {
+                Text("\(nota.dataFormatada())")
+            }
+        }
+        .onDelete { indexSet in
+            deletarNota(index: indexSet)
         }
     }
     
