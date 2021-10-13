@@ -17,9 +17,8 @@ class NotaViewModel: ObservableObject {
     @Published var irrf = 0.0
     @Published var outros = 0.0
     @Published var acoes = [AcaoNegociada]()
-    
+    @Published var dataOperacao = Date()
     @Published var notaNegociacao: NotaNegociacao!
-    
     @Published var novaNotaAberta = false
     @Published var alertaSalvar = false
     
@@ -40,6 +39,7 @@ class NotaViewModel: ObservableObject {
             self.irrf = nota?.irrf ?? 0.0
             self.outros = nota?.outros ?? 0.0
             self.acoes = Array(nota?.listaAcoes as? Set<AcaoNegociada> ?? [])
+            self.dataOperacao = nota?.dataOperacao ?? Date()
         }.store(in: &subscriptions)
     }
     
@@ -82,7 +82,7 @@ class NotaViewModel: ObservableObject {
                                    impostos: impostos,
                                    IRRF: irrf,
                                    outros: outros,
-                                   dataOperacao: Date(),
+                                   dataOperacao: dataOperacao,
                                    context: viewContext)
                 novaNota.addToListaAcoes(NSSet(array: acoes))
             } else {
@@ -98,7 +98,7 @@ class NotaViewModel: ObservableObject {
                 notaNegociacao.impostos = impostos
                 notaNegociacao.irrf = irrf
                 notaNegociacao.outros = outros
-                notaNegociacao.dataOperacao = Date()
+                notaNegociacao.dataOperacao = dataOperacao
                 notaNegociacao.addToListaAcoes(NSSet(array: acoes))
             }
             

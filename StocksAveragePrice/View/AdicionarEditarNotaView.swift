@@ -16,7 +16,6 @@ struct AdicionarEditarNotaView: View {
         formatter.numberStyle = .currency
         return formatter
     }()
-    
     private let formatoInteiro: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -32,7 +31,8 @@ struct AdicionarEditarNotaView: View {
                 clearing
                 bolsa
                 custoOperacional
-                acao
+                datePicker
+                acoes
             }
             .listStyle(.insetGrouped)
         }
@@ -67,7 +67,6 @@ struct AdicionarEditarNotaView: View {
             })
         }.padding(20)
     }
-    
     var custoOperacional: some View {
         Section(header: Text("CUSTO OPERACIONAL")) {
             TextField("Taxa operacional", value: $notaViewModel.taxaOperacional, formatter: formatoMoeda)
@@ -78,7 +77,6 @@ struct AdicionarEditarNotaView: View {
             TextField("Outros", value: $notaViewModel.outros, formatter: formatoMoeda)
         }
     }
-    
     var bolsa: some View {
         Section(header: Text("BOLSA")) {
             TextField("Taxa de termo/opções", value: $notaViewModel.taxaTermoOpcoes, formatter: formatoMoeda)
@@ -86,7 +84,6 @@ struct AdicionarEditarNotaView: View {
             TextField("Emolumentos", value: $notaViewModel.emolumentos, formatter: formatoMoeda)
         }
     }
-    
     var clearing: some View {
         Section(header: Text("CLEARING")) {
             TextField("Valor líquido das operações", value: $notaViewModel.valorLiquidoOperacoes, formatter: formatoMoeda)
@@ -94,8 +91,7 @@ struct AdicionarEditarNotaView: View {
             TextField("Taxa de registro", value: $notaViewModel.taxaRegistro, formatter: formatoMoeda)
         }
     }
-    
-    var acao: some View {
+    var acoes: some View {
         Section(header: Text("PAPÉIS")) {
             HStack {
                 Text("Ação")
@@ -152,6 +148,9 @@ struct AdicionarEditarNotaView: View {
             }
         }
     }
+    var datePicker: some View {
+        DatePicker("Data da operação", selection: $notaViewModel.dataOperacao, in: ...Date(), displayedComponents: .date)
+    }
     
     private func adicionarNovaAcao() {
         withAnimation {
@@ -165,7 +164,6 @@ struct AdicionarEditarNotaView: View {
             PersistenceController.shared.save()
         }
     }
-    
     private func salvarNotaNegociacao() {
         withAnimation {
             notaViewModel.salvarNotaNegociacao(viewContext: viewContext)
