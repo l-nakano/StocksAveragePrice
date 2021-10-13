@@ -69,26 +69,86 @@ struct AdicionarEditarNotaView: View {
     }
     var custoOperacional: some View {
         Section(header: Text("CUSTO OPERACIONAL")) {
-            TextField("Taxa operacional", value: $notaViewModel.taxaOperacional, formatter: formatoMoeda)
-            TextField("Execução", value: $notaViewModel.execucao, formatter: formatoMoeda)
-            TextField("Taxa de custódia", value: $notaViewModel.taxaCustodia, formatter: formatoMoeda)
-            TextField("Impostos", value: $notaViewModel.impostos, formatter: formatoMoeda)
-            TextField("I.R.R.F.", value: $notaViewModel.irrf, formatter: formatoMoeda)
-            TextField("Outros", value: $notaViewModel.outros, formatter: formatoMoeda)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Taxa operacional")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.taxaOperacional, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Execução")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.execucao, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Taxa de custódia")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.taxaCustodia, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Impostos")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.impostos, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("I.R.R.F.")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.irrf, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Outros")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.outros, formatter: formatoMoeda)
+            }
         }
     }
     var bolsa: some View {
         Section(header: Text("BOLSA")) {
-            TextField("Taxa de termo/opções", value: $notaViewModel.taxaTermoOpcoes, formatter: formatoMoeda)
-            TextField("Taxa A.N.A.", value: $notaViewModel.taxaANA, formatter: formatoMoeda)
-            TextField("Emolumentos", value: $notaViewModel.emolumentos, formatter: formatoMoeda)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Taxa de termo/opções")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.taxaTermoOpcoes, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Taxa A.N.A.")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.taxaANA, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Emolumentos")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.emolumentos, formatter: formatoMoeda)
+            }
         }
     }
     var clearing: some View {
         Section(header: Text("CLEARING")) {
-            TextField("Valor líquido das operações", value: $notaViewModel.valorLiquidoOperacoes, formatter: formatoMoeda)
-            TextField("Taxa de liquidação", value: $notaViewModel.taxaLiquidacao, formatter: formatoMoeda)
-            TextField("Taxa de registro", value: $notaViewModel.taxaRegistro, formatter: formatoMoeda)
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Valor líquido das operações")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.valorLiquidoOperacoes, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Taxa de liquidação")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.taxaLiquidacao, formatter: formatoMoeda)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Taxa de registro")
+                    .foregroundColor(.gray)
+                    .font(.footnote)
+                TextField("", value: $notaViewModel.taxaRegistro, formatter: formatoMoeda)
+            }
         }
     }
     var acoes: some View {
@@ -135,6 +195,8 @@ struct AdicionarEditarNotaView: View {
                             })
                         }
                     }
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
                 }
             }
             HStack {
