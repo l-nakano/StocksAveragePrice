@@ -26,20 +26,7 @@ struct AdicionarEditarNotaView: View {
     var body: some View {
         VStack(spacing: 0) {
             if notaViewModel.notaNegociacao == nil {
-                HStack {
-                    Button(action: {
-                        notaViewModel.novaNotaAberta.toggle()
-                    }, label: {
-                        Text("Cancelar")
-                    })
-                    Spacer()
-                    Button(action: {
-                        salvarNotaNegociacao()
-                        notaViewModel.novaNotaAberta.toggle()
-                    }, label: {
-                        Text("Salvar")
-                    })
-                }.padding(20)
+                botoesParaNovaNota
             }
             List {
                 clearing
@@ -52,11 +39,33 @@ struct AdicionarEditarNotaView: View {
         .toolbar {
             Button(action: {
                 salvarNotaNegociacao()
-                self.presentationMode.wrappedValue.dismiss()
+                if !notaViewModel.alertaSalvar { presentationMode.wrappedValue.dismiss() }
             }, label: {
                 Text("Salvar")
             })
         }
+        .alert(isPresented: $notaViewModel.alertaSalvar) {
+            Alert(title: Text("Nota de negociação incompleta!"),
+                  message: Text("O valor líquido das operações deve ser maior que R$ 0,00 e a nota deve contar ao menos uma ação negociada"),
+                  dismissButton: .default(Text("Ok")))
+        }
+    }
+    
+    var botoesParaNovaNota: some View {
+        HStack {
+            Button(action: {
+                notaViewModel.novaNotaAberta.toggle()
+            }, label: {
+                Text("Cancelar")
+            })
+            Spacer()
+            Button(action: {
+                salvarNotaNegociacao()
+                if !notaViewModel.alertaSalvar { notaViewModel.novaNotaAberta.toggle() }
+            }, label: {
+                Text("Salvar")
+            })
+        }.padding(20)
     }
     
     var custoOperacional: some View {
@@ -90,13 +99,13 @@ struct AdicionarEditarNotaView: View {
         Section(header: Text("PAPÉIS")) {
             HStack {
                 Text("Ação")
-                    .frame(maxWidth: .infinity)
-                Text("Operação")
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Text("Quantidade")
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .center)
                 Text("Preço")
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                Text("Operação")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             }
             .font(.callout)
             .lineLimit(1)
@@ -106,17 +115,29 @@ struct AdicionarEditarNotaView: View {
                     HStack {
                         TextField("Ticker", text: $notaViewModel.acoes[index].ticker)
                             .frame(maxWidth: .infinity)
-                        if notaViewModel.acoes[index].operacao == 0 {
-                            Text("V")
-                                .frame(maxWidth: .infinity)
-                        } else {
-                            Text("C")
-                                .frame(maxWidth: .infinity)
-                        }
+                            .multilineTextAlignment(.leading)
                         TextField("Quantidade", value: $notaViewModel.acoes[index].quantidade, formatter: formatoInteiro)
                             .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.center)
                         TextField("Preço", value: $notaViewModel.acoes[index].preco, formatter: formatoMoeda)
                             .frame(maxWidth: .infinity)
+                            .multilineTextAlignment(.trailing)
+                        Group {
+                            notaViewModel.acoes[index].operacao == 0 ? Text("V") : Text("C")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .contextMenu {
+                            Button(action: {
+                                notaViewModel.insereOperacaoCompra(index: index)
+                            }, label: {
+                                Text("Compra")
+                            })
+                            Button(action: {
+                                notaViewModel.insereOperacaoVenda(index: index)
+                            }, label: {
+                                Text("Venda")
+                            })
+                        }
                     }
                 }
             }

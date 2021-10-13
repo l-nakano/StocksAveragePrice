@@ -21,6 +21,7 @@ class NotaViewModel: ObservableObject {
     @Published var notaNegociacao: NotaNegociacao!
     
     @Published var novaNotaAberta = false
+    @Published var alertaSalvar = false
     
     var subscriptions = Set<AnyCancellable>()
     
@@ -54,41 +55,55 @@ class NotaViewModel: ObservableObject {
         acoes.append(acao)
     }
     
+    func insereOperacaoVenda(index: Int) {
+        acoes[index].operacao = 0
+        self.objectWillChange.send()
+    }
+    
+    func insereOperacaoCompra(index: Int) {
+        acoes[index].operacao = 1
+        self.objectWillChange.send()
+    }
+    
     func salvarNotaNegociacao(viewContext: NSManagedObjectContext) {
-        if notaNegociacao == nil {
-            let novaNota = NotaNegociacao(valorLiquidoOperacoes: valorLiquidoOperacoes,
-                               taxaLiquidacao: taxaLiquidacao,
-                               taxaRegistro: taxaRegistro,
-                               taxaTermoOpcoes: taxaTermoOpcoes,
-                               taxaANA: taxaANA,
-                               emolumentos: emolumentos,
-                               taxaOperacional: taxaOperacional,
-                               execucao: execucao,
-                               taxaCustodia: taxaCustodia,
-                               impostos: impostos,
-                               IRRF: irrf,
-                               outros: outros,
-                               dataOperacao: Date(),
-                               context: viewContext)
-            novaNota.addToListaAcoes(NSSet(array: acoes))
+        if valorLiquidoOperacoes == 0 || acoes.count == 0 {
+            alertaSalvar.toggle()
         } else {
-            notaNegociacao.valorLiquidoOperacoes = valorLiquidoOperacoes
-            notaNegociacao.taxaLiquidacao = taxaLiquidacao
-            notaNegociacao.taxaRegistro = taxaRegistro
-            notaNegociacao.taxaTermoOpcoes = taxaTermoOpcoes
-            notaNegociacao.taxaANA = taxaANA
-            notaNegociacao.emolumentos = emolumentos
-            notaNegociacao.taxaOperacional = taxaOperacional
-            notaNegociacao.execucao = execucao
-            notaNegociacao.taxaCustodia = taxaCustodia
-            notaNegociacao.impostos = impostos
-            notaNegociacao.irrf = irrf
-            notaNegociacao.outros = outros
-            notaNegociacao.dataOperacao = Date()
-            notaNegociacao.addToListaAcoes(NSSet(array: acoes))
+            if notaNegociacao == nil {
+                let novaNota = NotaNegociacao(valorLiquidoOperacoes: valorLiquidoOperacoes,
+                                   taxaLiquidacao: taxaLiquidacao,
+                                   taxaRegistro: taxaRegistro,
+                                   taxaTermoOpcoes: taxaTermoOpcoes,
+                                   taxaANA: taxaANA,
+                                   emolumentos: emolumentos,
+                                   taxaOperacional: taxaOperacional,
+                                   execucao: execucao,
+                                   taxaCustodia: taxaCustodia,
+                                   impostos: impostos,
+                                   IRRF: irrf,
+                                   outros: outros,
+                                   dataOperacao: Date(),
+                                   context: viewContext)
+                novaNota.addToListaAcoes(NSSet(array: acoes))
+            } else {
+                notaNegociacao.valorLiquidoOperacoes = valorLiquidoOperacoes
+                notaNegociacao.taxaLiquidacao = taxaLiquidacao
+                notaNegociacao.taxaRegistro = taxaRegistro
+                notaNegociacao.taxaTermoOpcoes = taxaTermoOpcoes
+                notaNegociacao.taxaANA = taxaANA
+                notaNegociacao.emolumentos = emolumentos
+                notaNegociacao.taxaOperacional = taxaOperacional
+                notaNegociacao.execucao = execucao
+                notaNegociacao.taxaCustodia = taxaCustodia
+                notaNegociacao.impostos = impostos
+                notaNegociacao.irrf = irrf
+                notaNegociacao.outros = outros
+                notaNegociacao.dataOperacao = Date()
+                notaNegociacao.addToListaAcoes(NSSet(array: acoes))
+            }
+            
+            PersistenceController.shared.save()
         }
-        
-        PersistenceController.shared.save()
     }
 }
 
